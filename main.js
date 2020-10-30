@@ -4,6 +4,7 @@ const buttonNormal = document.querySelector(".normal");
 const buttonHard = document.querySelector(".hard");
 let levelOfDifficulty = 0;
 const levelNotSelectedWarning = document.createElement ("span");
+let points = 0;
 
 function difficultySelector () {
   buttonEasy.addEventListener ("click", function () {
@@ -84,9 +85,37 @@ function createBalloon() {
   balloonsContainer.appendChild(elementImg);
 }
 
+const pointsShower = document.createElement ("p");
+header.appendChild (pointsShower);
+
+function showPoints (points) {
+  pointsShower.textContent = "seus pontos: " + points;
+  pointsShower.style.color = "white";
+  console.log (pointsShower);
+}
+
+
 function removeBalloon(element) {
   const boomSound = new Audio("./assets/boom.mpeg");
   boomSound.play();
   boomSound.volume = 0.1;
   element.remove();
+  let pointsPerBaloon;
+  switch (levelOfDifficulty) {
+
+    case 1:
+     pointsPerBaloon = 1;
+     break; 
+     
+     case 2:
+      pointsPerBaloon = 3;
+       break; 
+     
+     case 3:
+      pointsPerBaloon = 6;
+       break;  
+
+ }
+  points += pointsPerBaloon;
+  showPoints (points);
 }
