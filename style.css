@@ -24,6 +24,48 @@ header {
   text-align: center;
 }
 
+.levels-container {
+  z-index: 2;
+}
+
+.easy,
+.normal,
+.hard {
+  border: none;
+  border-radius: 10px;
+  width: 66px;
+  height: 20px;
+  cursor: pointer;
+  outline: none;
+  color: white;
+}
+
+.easy{
+  background-color: green;
+}
+
+.easy:focus {
+  background-color: rgb(92, 114, 98);
+}
+
+.normal{
+  background-color: rgb(212, 212, 0);
+}
+
+.normal:focus {
+  background-color: rgb(116, 114, 94);
+}
+
+.hard {
+  background-color: rgb(197, 9, 9);
+}
+
+.hard:focus {
+  background-color: rgb(109, 87, 87);
+}
+
+
+
 @keyframes animationButton {
   0% {
     width: 200px;

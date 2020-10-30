@@ -1,12 +1,66 @@
 const buttonInitGame = document.querySelector(".btn-init-game");
+const buttonEasy = document.querySelector(".easy");
+const buttonNormal = document.querySelector(".normal");
+const buttonHard = document.querySelector(".hard");
+let levelOfDifficulty = 0;
+const levelNotSelectedWarning = document.createElement ("span");
+
+function difficultySelector () {
+  buttonEasy.addEventListener ("click", function () {
+      levelOfDifficulty = 1;   
+  })
+
+  buttonNormal.addEventListener ("click", function () {
+    levelOfDifficulty = 2;   
+})
+
+buttonHard.addEventListener ("click", function () {
+  levelOfDifficulty = 3;   
+})
+
+}
+difficultySelector();
+
+const header = document.querySelector ("header");
 
 buttonInitGame.addEventListener("click", function () {
-  buttonInitGame.remove();
-  initGame();
+  
+
+  if (levelOfDifficulty === 0) {
+    levelNotSelectedWarning.textContent = "*selecione um nivel de dificuldade para começar o game*";
+    levelNotSelectedWarning.style.color = "white";
+    levelNotSelectedWarning.style.margin = "20px";
+    levelNotSelectedWarning.style.textAlign = "center";
+    header.appendChild (levelNotSelectedWarning);
+  
+  } else{
+    levelNotSelectedWarning.remove();
+    buttonInitGame.remove();
+    buttonEasy.remove();
+    buttonNormal.remove();
+    buttonHard.remove();
+    initGame();
+  }
 });
 
 function initGame() {
-  setInterval(createBalloon, 1000);
+  let spawnFrequency;
+  switch (levelOfDifficulty) {
+
+     case 1:
+      spawnFrequency = 1000;
+      break; 
+      
+      case 2:
+        spawnFrequency = 800;
+        break; 
+      
+      case 3:
+        spawnFrequency = 400;
+        break;  
+
+  }
+  setInterval(createBalloon, spawnFrequency);
 }
 
 const balloonsContainer = document.querySelector(".container-balloons");
