@@ -5,6 +5,15 @@ const buttonHard = document.querySelector(".hard");
 let levelOfDifficulty = 0;
 const levelNotSelectedWarning = document.createElement ("span");
 let points = 0;
+const restartButton = document.querySelector (".restart-btn");
+
+function restart () {
+  restartButton.addEventListener ("click", function () {
+    location.reload();
+    console.log("reload");
+})
+}
+restart ()
 
 function difficultySelector () {
   buttonEasy.addEventListener ("click", function () {
