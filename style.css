@@ -109,3 +109,48 @@ header {
   cursor: url("./assets/alfinete.png"), auto;
   position: absolute;
 }
+
+.game-over {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #81caa8;
+  background-image: url("./assets/balloon.svg");
+  background-size: 50px;
+  z-index: 3;
+  width: 60vw;
+  height: 50vh; 
+  top: 25vh;
+  right: 20vw;
+  border-radius: 25px;
+}
+
+.game-over-alert,
+.score {
+  color: white;
+  font-size: 30px;
+  margin: 10px;
+  text-align: center;
+}
+
+.game-over-alert {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.restart-btn {
+  margin-top: 15px;
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  background-color: #ffffff;
+  color: #81caa8;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 22px;
+  animation: 1s ease-in-out infinite animationButton;
+}
+
+
