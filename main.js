@@ -2,18 +2,12 @@ const buttonInitGame = document.querySelector(".btn-init-game");
 const buttonEasy = document.querySelector(".easy");
 const buttonNormal = document.querySelector(".normal");
 const buttonHard = document.querySelector(".hard");
-let levelOfDifficulty = 0;
 const levelNotSelectedWarning = document.createElement ("span");
+const pointsShower = document.createElement ("p");
+const body = document.querySelector ("body");
+let ballonsOnScreen = 0;
+let levelOfDifficulty = 0;
 let points = 0;
-const restartButton = document.querySelector (".restart-btn");
-
-function restart () {
-  restartButton.addEventListener ("click", function () {
-    location.reload();
-    console.log("reload");
-})
-}
-restart ()
 
 function difficultySelector () {
   buttonEasy.addEventListener ("click", function () {
@@ -92,9 +86,38 @@ function createBalloon() {
   });
 
   balloonsContainer.appendChild(elementImg);
+  ballonsOnScreen +=1;
+  if (ballonsOnScreen === 5) {
+    gameOver ();
+  }
 }
 
-const pointsShower = document.createElement ("p");
+function restart (restartButton) {
+  restartButton.addEventListener ("click", function () {
+  location.reload();
+})
+}
+
+
+function gameOver () {
+  const gameOverContainer = document.createElement ("section");
+  gameOverContainer.setAttribute("class", "game-over");
+  const GameOverAlert = document.createElement ("p");
+  GameOverAlert.setAttribute("class", "game-over-alert");
+  const score = document.createElement ("p");
+  score.setAttribute("class", "score");
+  GameOverAlert.textContent = "Game Over";
+  score.textContent = "sua pontuação foi: " + points;
+  const restartBtn = document.createElement ("button");
+  restartBtn.setAttribute("class", "restart-btn");
+  restartBtn.textContent = "Restart";
+  gameOverContainer.appendChild (GameOverAlert);
+  gameOverContainer.appendChild (score);
+  gameOverContainer.appendChild (restartBtn);
+  body.appendChild (gameOverContainer);
+  restart (restartBtn);
+}
+
 header.appendChild (pointsShower);
 
 function showPoints (points) {
@@ -105,26 +128,29 @@ function showPoints (points) {
 
 
 function removeBalloon(element) {
-  const boomSound = new Audio("./assets/boom.mpeg");
-  boomSound.play();
-  boomSound.volume = 0.1;
-  element.remove();
-  let pointsPerBaloon;
-  switch (levelOfDifficulty) {
+  if (ballonsOnScreen < 5) {
+    const boomSound = new Audio("./assets/boom.mpeg");
+    boomSound.play();
+    boomSound.volume = 0.1;
+    element.remove();
+    let pointsPerBaloon;
+    switch (levelOfDifficulty) {
 
-    case 1:
-     pointsPerBaloon = 1;
-     break; 
+      case 1:
+      pointsPerBaloon = 2;
+      break; 
      
-     case 2:
-      pointsPerBaloon = 3;
-       break; 
+      case 2:
+        pointsPerBaloon = 3;
+        break; 
      
-     case 3:
-      pointsPerBaloon = 6;
-       break;  
+      case 3:
+        pointsPerBaloon = 6;
+        break;  
 
- }
-  points += pointsPerBaloon;
-  showPoints (points);
+  }
+    points += pointsPerBaloon;
+    ballonsOnScreen -=1;
+    showPoints (points);
+}
 }
