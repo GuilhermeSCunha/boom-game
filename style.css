@@ -24,6 +24,13 @@ header {
   text-align: center;
 }
 
+.game-description-secondary {
+  color: #81caa8;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 .levels-container {
   z-index: 2;
 }
